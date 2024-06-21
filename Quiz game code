@@ -1,0 +1,50 @@
+def display_question(question, options):
+    print(question)
+    for idx, option in enumerate(options, start=1):
+        print(f"{idx}. {option}")
+
+def get_user_input():
+    while True:
+        user_input = input("Enter your choice (1-4): ")
+        if user_input.isdigit() and 1 <= int(user_input) <= 4:
+            return int(user_input)
+        else:
+            print("Invalid input. Please enter a number between 1 and 4.")
+
+def check_answer(user_answer, correct_answer):
+    return user_answer == correct_answer
+
+def quiz():
+    questions = [
+        {
+            "question": "What is the capital of France?",
+            "options": ["London", "Paris", "Berlin", "Madrid"],
+            "correct_answer": 2  # Index of the correct answer in options list
+        },
+        {
+            "question": "Which planet is known as the Red Planet?",
+            "options": ["Mars", "Jupiter", "Saturn", "Neptune"],
+            "correct_answer": 1
+        },
+        {
+            "question": "Who wrote 'Romeo and Juliet'?",
+            "options": ["Shakespeare", "Marlowe", "Jonson", "Dickens"],
+            "correct_answer": 0
+        }
+    ]
+
+    score = 0
+
+    for q in questions:
+        display_question(q["question"], q["options"])
+        user_choice = get_user_input()
+        if check_answer(user_choice - 1, q["correct_answer"]):
+            print("Correct!")
+            score += 1
+        else:
+            print("Incorrect. The correct answer is:", q["options"][q["correct_answer"]])
+
+    print(f"Quiz completed! Your final score is {score}/{len(questions)}.")
+
+if __name__ == "__main__":
+    quiz()
