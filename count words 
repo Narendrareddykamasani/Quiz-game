@@ -1,1 +1,30 @@
-count words 
+
+# Function to count words in a given string
+def count_words(input_string):
+    # Remove leading and trailing whitespace
+    input_string = input_string.strip()
+    
+    # Handle case where input is empty
+    if not input_string:
+        return 0
+    
+    # Split the string by whitespace to count words
+    words = input_string.split()
+    
+    # Return the number of words
+    return len(words)
+
+# Main function to handle input, output, and control flow
+def main():
+    # User prompt and input handling
+    user_input = input("Enter a sentence or paragraph: ")
+    
+    # Calculate word count using the function
+    word_count = count_words(user_input)
+    
+    # Output the result
+    print(f"Word count: {word_count}")
+
+# Entry point of the program
+if __name__ == "__main__":
+    main()
