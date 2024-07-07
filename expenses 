@@ -1,0 +1,58 @@
+import json
+import os
+from datetime import datetime
+
+# File path for storing expense data
+DATA_FILE = "expense_data.json"
+
+# Initialize empty expense list
+expenses = []
+
+# Load existing data from file if available
+if os.path.exists(DATA_FILE):
+    with open(DATA_FILE, 'r') as f:
+        expenses = json.load(f)
+
+def save_expenses():
+    with open(DATA_FILE, 'w') as f:
+        json.dump(expenses, f, indent=4)
+
+def add_expense():
+    amount = float(input("Enter amount spent: "))
+    description = input("Enter a brief description: ")
+    category = input("Enter expense category (food/transportation/entertainment): ")
+
+    expense = {
+        'amount': amount,
+        'description': description,
+        'category': category,
+        'date': datetime.now().isoformat()  # Store current date/time
+    }
+    expenses.append(expense)
+    save_expenses()
+    print("Expense added successfully!")
+
+def display_summary():
+    # Implement functions to display summaries (monthly, category-wise)
+    pass
+
+def main():
+    while True:
+        print("\nExpense Tracker Menu:")
+        print("1. Add Expense")
+        print("2. View Summary")
+        print("3. Exit")
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            add_expense()
+        elif choice == '2':
+            display_summary()
+        elif choice == '3':
+            print("Exiting Expense Tracker. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
+
+if __name__ == "__main__":
+    main()
